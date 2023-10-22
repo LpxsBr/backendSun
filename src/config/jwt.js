@@ -5,7 +5,7 @@ export const verifyAuth = (req, res, next) => {
     var auth = req.headers['authorization']
 
     if (!auth) {
-        return res.status(404).json('without token')
+        return res.status(404).json('No token found')
     }
 
     auth = auth.replace('Bearer ', '')
@@ -23,7 +23,7 @@ export const verifyAuth = (req, res, next) => {
 
 export const generateAuth = (payload) => {
     const options = {
-        expiresIn: 10 * 60 * 60
+        expiresIn: 24 * 60 * 60 * 1000
     }
     return jwt.sign(payload, secret, options)
 }
